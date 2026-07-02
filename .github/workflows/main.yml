@@ -15,7 +15,12 @@ jobs:
           distribution: 'microsoft'
 
       - name: Extract Project
-        run: unzip verbi.zip
+        run: |
+          unzip verbi.zip
+          # Если файлы распаковались в подпапку verbi, переносим их в корень
+          if [ -d "verbi" ]; then
+            mv verbi/* .
+          fi
 
       - name: Make gradlew executable
         run: chmod +x gradlew
